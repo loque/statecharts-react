@@ -89,7 +89,7 @@ export const registrationMachine = createMachine(
         states: {
           processing: {
             always: [
-              { target: "#registration.incomplete", cond: "isValid" },
+              { target: "#registration.incomplete", cond: "isInvalid" },
               { target: "#registration.submitting" },
             ],
           },
@@ -156,7 +156,7 @@ export const registrationMachine = createMachine(
     guards: {
       isMinLength: (context) => context.participants.length === 1,
       isMaxLength: (context) => context.participants.length === 4,
-      isValid: (context) =>
+      isInvalid: (context) =>
         !!context.participants.find((participant) => participant.error),
     },
   }
